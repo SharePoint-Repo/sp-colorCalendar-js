@@ -21,11 +21,8 @@ npx degit SharePoint-Repo/sp-colorCalendar-js myColorCalendarProject
 cd myColorCalendarProject
 npm install
 ```
----
-- Note: You will need to have [Node.js](https://nodejs.org) installed.
----
 ### Prerequisites
 
 Requires [Node.js](https://nodejs.org/)
-It's very helpful if you have access to SharePoint, since this is a SharePoint development starter kit template.
-The generated project will work with SharePoint 2013, SharePoint 2016, SharePoint 2019, and SharePoint Online. 
+It's very helpful if you have access to SharePoint.
+The generated code will work with SharePoint 2013, SharePoint 2016, SharePoint 2019, and SharePoint Online (classic). 
