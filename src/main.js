@@ -1,15 +1,9 @@
 function WaitForCalendarToLoad() {  
 	document.querySelectorAll('.ms-acal-item').forEach((element) => {element.style.display = 'none';});
-	LoadSodByKey("SP.UI.ApplicationPages.Calendar.js", function(){window.setInterval(ColorCalendar, 50);});
-}
-function Start(){
-	ColorCalendar(); 
-	var _onItemsSucceed = SP.UI.ApplicationPages.CalendarStateHandler.prototype.onItemsSucceed; 
-	SP.UI.ApplicationPages.CalendarStateHandler.prototype.onItemsSucceed = function($p0, $p1){
-		_onItemsSucceed.call(this, $p0, $p1); 
-
-		ColorCalendar();
-	}
+	LoadSodByKey("SP.UI.ApplicationPages.Calendar.js", function(){
+		setInterval(ColorCalendar, 50);
+		
+	});
 }
 
 function contains(selector, text) {
@@ -28,17 +22,30 @@ function ColorCalendar(){
 				let fontColor = GetFontColor(element.innerHTML);
 				let link = GetLink(element.innerHTML);
 				element.innerHTML = GetActualText(element.innerHTML);
-				if (link != '') {
-					box.querySelector('a[onclick').setAttribute('onclick', '')
-					box.querySelector('a[href]').setAttribute('href',link);
+				if (box != null)  {
+					
+					box.querySelector('a[onclick]').setAttribute('onclick', '')
+					
+					if(link != null){ 
+						box.querySelector('a[href]').setAttribute('href',link) 
+					}
+				
+					box.setAttribute("title", GetActualText(box.getAttribute('title')));
+					
+					if(bgColor != null){ 
+						const boxStyle = box.getAttribute('style'); 
+						box.setAttribute('style', boxStyle + '; background-color: ' + bgColor);
+					}
+					if(fontColor != null){
+						const elStyle = element.getAttribute('style'); 
+						element.setAttribute('style',  elStyle + '; color: ' + fontColor + ' !important');
+					}
+					box.setAttribute('display', 'block');
 				}
-				box.setAttribute("title", GetActualText(box.getAttribute('title')));
-				box.style('backgroundColor', bgColor);
-				element.setAttribute('style',  'color: ' + fontColor + ' !important');
-				box.setAttribute('display', 'block');
 			});      
 		}  
-}   
+} 
+	
 function GetActualText(originalText) {     
 	var parts = originalText.split(SEPARATOR);
 	return parts[0] ;   
@@ -57,5 +64,23 @@ function GetLink(linkText) {
 }
 var SEPARATOR = "|||"; 	
 
-window.WaitForCalendarToLoad = WaitForCalendarToLoad; 
+// Closest Element IE polyfill
+if (!Element.prototype.matches) {
+	Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+}
+  
+if (!Element.prototype.closest) {
+	Element.prototype.closest = function(s) {
+		var el = this;
+
+		do {
+			if (el.matches(s)) return el;
+			el = el.parentElement || el.parentNode;
+		} while (el !== null && el.nodeType === 1);
+		return null;
+	};
+}
+
+window.WaitForCalendarToLoad = WaitForCalendarToLoad;
+window.ColorCalendar = ColorCalendar;  
 _spBodyOnLoadFunctionNames.push('WaitForCalendarToLoad');

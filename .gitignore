@@ -1,6 +1,4 @@
 /node_modules/
-/public/build/
-/config/
 .DS_Store
 package-lock.json
 user_profile.ps1.default
