@@ -1,15 +1,19 @@
 # sp-colorCalendar-JS
 ## SharePoint Color Calendar
-
+![alt text](https://github.com/SharePoint-Repo/sp-colorCalendar-js/blob/master/colorCalendar.png "SharePoint Color Calendar")
 ## Quick Start
 
 1. Create a calculated column: concatenate(title, " ||| ", category)
+![alt text](https://github.com/SharePoint-Repo/sp-colorCalendar-js/blob/master/NewCalcCol.PNG)
 2. Change all default views, where the column you created, replaces title
-3. Edit the page the calender appears on include bundle.js from ./public/build. 
-4. Edit your categories. [Name] ||| [Background Color] ||| [Font Color] i.e., "Meeting ||| Red ||| gold"  
-5. The separator was selected to be unique, if you need a different separator, "|||" change SEPARATOR variable in the script.
+![alt text](https://github.com/SharePoint-Repo/sp-colorCalendar-js/blob/master/updateView.PNG)
+3. Edit your categories. [Name] ||| [Background Color] ||| [Font Color] i.e., "Meeting ||| Red ||| gold"  
+![alt text](https://github.com/SharePoint-Repo/sp-colorCalendar-js/blob/master/categoryfield.png)
+4. Edit the page the calender appears on; include bundle.js from ./public/build. 
+---
+- Note: The separator was selected to be unique, if you need a different separator, "|||" change SEPARATOR variable in the script.
 
-## Customize this project template 
+## Alternatively, create your own color calendar code using this project template 
 Create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
 
 ```bash
@@ -17,15 +21,9 @@ npx degit SharePoint-Repo/sp-colorCalendar-js myColorCalendarProject
 cd myColorCalendarProject
 npm install
 ```
-
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
-
-
-*Looking for a shareable component template the works with SharePoint? Coming Soon*
-
 ---
-
-
+- Note: You will need to have [Node.js](https://nodejs.org) installed.
+---
 ### Prerequisites
 
 Requires [Node.js](https://nodejs.org/)
