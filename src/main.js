@@ -1,9 +1,36 @@
-function WaitForCalendarToLoad() {  
+function WaitForCalendarToLoad() {
+	//Week or Day Calendar View
+    
 	document.querySelectorAll('.ms-acal-item').forEach((element) => {element.style.display = 'none';});
+	
+	
 	LoadSodByKey("SP.UI.ApplicationPages.Calendar.js", function(){
-		setInterval(ColorCalendar, 50);
+		SP.UI.ApplicationPages.DetailCalendarView.prototype.renderGrids_Old = SP.UI.ApplicationPages.DetailCalendarView.prototype.renderGrids;
+    	SP.UI.ApplicationPages.DetailCalendarView.prototype.renderGrids = function SP_UI_ApplicationPages_DetailCalendarView$renderGrids($p0) {
+        	this.renderGrids_Old($p0);
+
+        	ColorCalendar();
+    	};
+    
+    	//Month Calendar View
+    	SP.UI.ApplicationPages.SummaryCalendarView.prototype.renderGrids_Old =  SP.UI.ApplicationPages.SummaryCalendarView.prototype.renderGrids;
+    	SP.UI.ApplicationPages.SummaryCalendarView.prototype.renderGrids = function SP_UI_ApplicationPages_SummaryCalendarView$renderGrids($p0) {
+        	this.renderGrids_Old($p0);
+
+        	ColorCalendar();
+    	};
+
+	    //Resize Calendar
+    	SP.UI.ApplicationPages.CalendarStateHandler.prototype.parentResized_Old = SP.UI.ApplicationPages.CalendarStateHandler.prototype.parentResized;
+    	SP.UI.ApplicationPages.CalendarStateHandler.prototype.parentResized = function SP_UI_ApplicationPages_CalendarStateHandler$parentResized() {
+        	this.parentResized_Old();
+
+        	ColorCalendar();
+    	};  
+		ColorCalendar();
 		
 	});
+
 }
 
 function contains(selector, text) {
